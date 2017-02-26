@@ -36,25 +36,16 @@ class Posts extends AbstractMigration
             'limit' => 500,
             'null' => false,
         ]);
-        $table->addColumn('img_name', 'string', [
-            'default' => null,
-            'null' => true,
-        ]);
-        $table->addColumn('img_ext', 'string', [
-            'default' => null,
-            'null' => true,
-        ]);
-        $table->addColumn('img_size', 'integer', [
-            'default' => null,
-            'null' => true,
-        ]);
         $table->addColumn('created', 'datetime', [
             'null' => false,
         ]);
-
-        $table->addColumn('modified', 'datetime', [
+        $table->addColumn('password', 'string', [
+            'default' => null,
+            'limit' => 30,
             'null' => false,
         ]);
+        $table->addColumn('del_flag', 'boolean');
+        
         $table->create();
     }
 }

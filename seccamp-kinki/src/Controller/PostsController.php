@@ -4,9 +4,23 @@ use App\Controller\AppController;
 use Cake\Datasource\ConnectionManager;
 
 class PostsController extends AppController{
+    public $components = array('Paginator');
+    public $paginate = array(
+        'limit' => 2,
+        'order' => array(
+            'Post.id' => 'asc'
+        )
+    );
+    
+    public function initialize(){
+        parent::initialize();
+        $this->loadComponent('Paginator');
+    }
+
     public function index(){
         $query = $this->Posts->find()->where(['resId =' => 0]);
-        $posts = $this->paginate($query);
+        
+        $this->set('posts',$this->paginate($query));
 
         $this->set(compact('posts'));
         $this->set('_serialize', ['posts']);
